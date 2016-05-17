@@ -16,13 +16,26 @@ function convertNDarray(grid) {
 
 function wrap(FinderType) {
   var finder = new FinderType({
-    allowDiagonal: false
+    allowDiagonal: false,
+    diagonalMovement: 2
   })
   return function(grid) {
     var converted = convertNDarray(grid)
     return function(sy, sx, ty, tx, out) {
       var path = finder.findPath(sx, sy, tx, ty, converted.clone())
-      return path.length
+      var len = 0
+      if(out) {
+        for(var i=0; i<path.length; ++i) {
+          out[2*i] = path[i][0]
+          out[2*i+1] = path[i][1]
+        }
+      }
+      for(var i=1; i<path.length; ++i) {
+        var p0 = path[i]
+        var p1 = path[i-1]
+        len += Math.abs(p0[0]-p1[0]) + Math.abs(p0[1]-p1[1])
+      }
+      return len
     }
   }
 }

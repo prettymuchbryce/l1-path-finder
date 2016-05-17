@@ -5,7 +5,7 @@ var easystar = require('./libraries/easystar')
 var andrea = require('./libraries/astar-andrea')
 
 module.exports = {
-  // 'l1-path-finder': l1path,
+  'l1-path-finder': l1path,
   'easystar': easystar ,
   // 'astar-andrea (BROKEN)': andrea,
   // 'node-pathfinding': nodePathFinding,
